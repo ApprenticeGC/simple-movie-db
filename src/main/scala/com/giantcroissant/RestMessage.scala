@@ -22,3 +22,12 @@ case class CreateMovieRestMessage(
 case class DoneCreateMovieRestMessage(
   result: JsValue = Json.obj()
 ) extends RestMessage
+
+case class GetSpecificMovieRestMessage(
+  result: JsValue = Json.obj(),
+  id: String = ""
+) extends RestMessage
+
+case class DoneGetSpecificMovieRestMessage(
+  result: JsValue = Json.obj()
+) extends RestMessage

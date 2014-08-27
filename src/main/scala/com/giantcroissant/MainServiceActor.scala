@@ -45,16 +45,17 @@ trait MainService extends HttpService with PerRequestActorCreator {
     }
   }
 
-  // def getSpecificMovie = {
-  //   path("movies" / Segment) { movieId =>
-  //     get { ctx =>
-  //       ctx.complete(movieId)
-  //     }
-  //   }
-  // }
+  def getSpecificMovie = {
+    path("movies" / Segment) { movieId =>
+      get { ctx =>
+        val targetActorRef = Props(new GetSpecificMovieActor())
+        perRequest(ctx, targetActorRef, GetSpecificMovieRestMessage(id = movieId))
+      }
+    }
+  }
 
   def combinedRoute =
     retrieveAllMovies ~
-      createMovie// ~
-      //getSpecificMovie
+      createMovie ~
+      getSpecificMovie
 }
